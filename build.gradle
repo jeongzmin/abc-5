@@ -1,0 +1,71 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '3.0.1-SNAPSHOT'
+	id 'io.spring.dependency-management' version '1.1.0'
+}
+
+group = 'com.line'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '17'
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+	maven { url 'https://repo.spring.io/milestone' }
+	maven { url 'https://repo.spring.io/snapshot' }
+	
+	/* 직접 연결 설정 */
+	//maven {
+	//	url "https://~~~"
+	//}
+}
+
+dependencies {
+
+	/* file Tree 를 이용한 디렉토리 연결 */
+	implementation fileTree(dir:'libs', include: ['*.jar'])
+	testImplementation fileTree(dir:'libs', include: ['*.jar'])
+	
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+
+	//thymeleaf
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+	testImplementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+	// -- thymeleaf
+	
+	//spring-boot-starter
+	implementation 'org.springframework.boot:spring-boot-starter'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	// -- spring-boot-starter
+	
+	//log
+	//implementation("ch.qos.logback:logback-classic:1.4.3")
+	//testImplementation("ch.qos.logback:logback-classic:1.4.3")
+	//
+	//
+	//implementation 'org.slf4j:slf4j-api:1.7.35'
+	////implementation 'ch.qos.logback:logback-classic:1.2.0'
+	////implementation 'ch.qos.logback:logback-classic:1.2.3'
+	//implementation 'ch.qos.logback.contrib:logback-jackson:0.1.5'
+	//implementation 'ch.qos.logback.contrib:logback-json-classic:0.1.5'
+	//
+	//testImplementation 'org.slf4j:slf4j-api:1.7.35'
+	////testImplementation 'ch.qos.logback:logback-classic:1.2.0'
+	////testImplementation 'ch.qos.logback:logback-classic:1.2.3'
+	//testImplementation 'ch.qos.logback.contrib:logback-jackson:0.1.5'
+	//testImplementation 'ch.qos.logback.contrib:logback-json-classic:0.1.5'
+	//
+	//compileOnly("ch.qos.logback.contrib:logback-jackson:0.1.5");
+	//compileOnly("ch.qos.logback.contrib:logback-json-classic:0.1.5");
+	// -- log
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
